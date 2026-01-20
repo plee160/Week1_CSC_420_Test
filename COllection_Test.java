@@ -88,47 +88,7 @@ public class COllection_Test {
             num++;
         }
         
-        FLnames.sort(null);
-        System.out.println("----First Name Sorted List----");
-        num = 1;
-        for (String test2 : FLnames) {
-            
-            System.out.println(num + ". " + test2);
-            num++;
-        }
         
-        System.out.println("----Last Name Sorted List----");
-        FLnames.sort((a,b) -> {
-            String lastA = a.split(" ")[1];
-            String lastB = b.split(" ")[1];
-            return lastA.compareTo(lastB);
-        });
-        num = 1;
-        for (String test2 : FLnames) {
-            System.out.println(num + ". " + test2);
-            num++;
-        }
-        
-        System.out.println("----Special Formated Sort----");
-        
-        FLnames.sort(null);
-        Map <String, List<String>> special = new HashMap<>();
-        for (String name : FLnames) {
-
-            String[] Splitname = name.split(" ");
-            String first = Splitname[0];
-            String last = Splitname[1];
-            special.putIfAbsent(first, new ArrayList<>());
-            special.get(first).add(last);
-        }
-        
-        for (String Fspec : special.keySet()) {
-            System.out.println(Fspec);
-            
-            for (String Lspec : special.get(Fspec)) {
-                System.out.println("           " + Lspec);
-            }
-        }
 
         
     }
