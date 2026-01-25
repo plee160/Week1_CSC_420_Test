@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -21,6 +22,7 @@ public class COllection_Test {
     public static void main(String[] args) {
         // TODO code application logic here
         Random rand = new Random();
+        Scanner scnr = new Scanner(System.in);
         List<String> Fnames = new ArrayList<>();
         List<String> Lnames = new ArrayList<>();
         List<String> FLnames= new ArrayList<>();
@@ -80,36 +82,73 @@ public class COllection_Test {
             lastNames.add(Lnames.get(Lnum));
         }
         
-        System.out.println("----Non-Sorted List----");
-        int num = 1;
-        for (String test2 : FLnames) {
+        System.out.println("Choose How names should be sorted");
+        System.out.println("1. No Sort");
+        System.out.println("2. First Name Sort");
+        System.out.println("3. Last Name Sort");
+        System.out.println("4. Special Sort");
+        
+        int choice = scnr.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("----Non-Sorted List----");
+                int num = 1;
+                for (String test2 : FLnames) {
             
-            System.out.println(num + ". " + test2);
-            num++;
-        }
-        System.out.println("----Special Formated Sort----");
-        
-        FLnames.sort(null);
-        Map <String, List<String>> special = new HashMap<>();
-        for (String name : FLnames) {
-
-            String[] Splitname = name.split(" ");
-            String first = Splitname[0];
-            String last = Splitname[1];
-            special.putIfAbsent(first, new ArrayList<>());
-            special.get(first).add(last);
-        }
-        
-        for (String Fspec : special.keySet()) {
-            System.out.println(Fspec);
+                    System.out.println(num + ". " + test2);
+                    num++;
+                }
+                break;
             
-            for (String Lspec : special.get(Fspec)) {
-                System.out.println("           " + Lspec);
-            }
-        }
+            case 2:
+                FLnames.sort(null);
+                System.out.println("----First Name Sorted List----");
+                num = 1;
+                for (String test2 : FLnames) {
+            
+                    System.out.println(num + ". " + test2);
+                    num++;
+                }
+                break;
+                
+            case 3:
+                System.out.println("----Last Name Sorted List----");
+                FLnames.sort((a,b) -> {
+                String lastA = a.split(" ")[1];
+                String lastB = b.split(" ")[1];
+                return lastA.compareTo(lastB);
+                });
+                num = 1;
+                for (String test2 : FLnames) {
+                    System.out.println(num + ". " + test2);
+                    num++;
+                }
+                break;
+                
+            case 4:
+                System.out.println("----Special Formated Sort----");
         
+                FLnames.sort(null);
+                Map <String, List<String>> special = new HashMap<>();
+                for (String name : FLnames) {
 
+                    String[] Splitname = name.split(" ");
+                    String first = Splitname[0];
+                    String last = Splitname[1];
+                    special.putIfAbsent(first, new ArrayList<>());
+                    special.get(first).add(last);
+                }
         
+                for (String Fspec : special.keySet()) {
+                    System.out.println(Fspec);
+            
+                    for (String Lspec : special.get(Fspec)) {
+                        System.out.println("           " + Lspec);
+                    }
+                }
+                break;
+        }
     }
     
 }
+
